@@ -1,0 +1,19 @@
+{% macro render_field(field, class_='', id='', placeholder='', rows=None) %}
+  {% if field.label %}
+    <label for="{{ field.id }}">{{ field.label.text }}</label>
+  {% endif %}
+
+  {% if rows %}
+    {{ field(class=class_, id=id, placeholder=placeholder, rows=rows) }}
+  {% else %}
+    {{ field(class=class_, id=id, placeholder=placeholder) }}
+  {% endif %}
+
+  {% if field.errors %}
+    <div class="text-danger small">
+      {% for error in field.errors %}
+        <div>{{ error }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endmacro %}
